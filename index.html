@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle Clone</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(to right, #1f4037, #99f2c8);
+            margin: 0;
+            color: white;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        #game {
+            display: grid;
+            grid-template-columns: repeat(5, 60px);
+            grid-template-rows: repeat(6, 60px);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tile {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            font-weight: bold;
+            background-color: #555;
+            color: white;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .correct {
+            background-color: green !important;
+            color: white;
+            animation: pop 0.3s ease;
+        }
+        .present {
+            background-color: yellow !important;
+            color: black;
+            animation: pop 0.3s ease;
+        }
+        .absent {
+            background-color: darkgray !important;
+            color: white;
+            animation: shake 0.3s ease;
+        }
+        input, button {
+            padding: 15px;
+            margin: 10px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+        }
+        input {
+            width: 300px;
+        }
+        button {
+            cursor: pointer;
+            background-color: #444;
+            color: white;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        @keyframes pop {
+            0% { transform: scale(0.8); }
+            100% { transform: scale(1); }
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Wordle Clone BY coderxvicky</h1>
+    <label for="difficulty">Select Difficulty:</label>
+    <select id="difficulty" onchange="setDifficulty()">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+    </select>
+    <div id="levelInfo">Level: <span id="level">1</span></div>
+    <div id="game">
+        <!-- Tiles will be added here -->
+    </div>
+    <input type="text" id="guessInput" maxlength="5" placeholder="Enter your guess">
+    <button onclick="submitGuess()">Submit Guess</button>
+    <button onclick="nextLevel()">Next Level</button>
+    <script src="app.js"></script>
+</body>
+</html>
